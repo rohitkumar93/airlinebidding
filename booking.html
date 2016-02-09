@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+<head>
+	<title>Booking Page</title>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	 
+        <script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="less.min.js"></script>
+		<script type="text/javascript" src="underscore-min.js"></script>
+        <script type="text/javascript" src="moment.min.js"></script>   
+</head>
+<style>
+.vertical-centre (@height) {
+    height:@height;
+    line-height:@height !important;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.border-box {
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+}
+
+@border-colour:#CCC;
+calendar {
+    float:left;
+    display:block;
+    .border-box;
+    background:white;
+    width:300px;
+    border:solid 1px @border-colour;
+    margin-bottom:10px;
+    
+    @secondary-colour:#2875C7;
+    @spacing:10px;
+    @icon-width:40px;
+    @header-height:40px;
+
+    >div.header {
+        float:left;
+        width:100%;
+        background:@secondary-colour;
+        height:@header-height;
+        color:white;
+        
+        >* { 
+            .vertical-centre(@header-height);
+        }
+        
+        >i {
+            float:left;
+            width:@icon-width;
+            font-size:1.125em;
+            font-weight:bold;
+            position:relative;
+            .border-box;
+            padding:0 @spacing;
+            cursor:pointer;
+        }
+        
+        >i.fa-angle-left {
+            text-align:left;
+        }
+        
+        >i.fa-angle-right {
+            text-align:right;
+            margin-left:@icon-width*-1;
+        }
+        
+        >span { 
+            float:left;
+            width:100%;
+            font-weight:bold;
+            text-transform:uppercase;
+            .border-box;
+            padding-left:@icon-width+@spacing;
+            margin-left:@icon-width*-1;
+            text-align:center;
+            padding-right:@icon-width;
+            color:inherit;
+        }
+    }
+    >div.week {
+        float:left;
+        width:100%;
+        border-top:solid 1px @border-colour;
+        
+        &:first-child {
+            border-top:none;
+        }
+        
+        >span.day {
+            float:left;
+            width:100%/7;
+            .border-box;
+            border-left:solid 1px @border-colour;
+            font-size:0.75em;
+            text-align:center;
+            .vertical-centre(30px);
+            background:white;
+            cursor:pointer;
+            color:black;
+            
+            &:first-child {
+                border-left:none;
+            }
+            
+            &.today {
+                background:#E3F2FF;
+            }
+            
+            &.different-month {
+                color:#C0C0C0;
+            }
+            
+            &.selected {
+                background:@secondary-colour;
+                color:white;
+            }
+        }
+        
+        &.names>span {
+            color:@secondary-colour;
+            font-weight:bold;
+        }
+    }
+}
+</style>
+
+<body  ng-controller="calendarDemo">
+<calendar selected="day"></calendar>
+<span>Selected date: <b>{{day.format('dddd, MMMM Do YYYY')}}</b></label>
+<div class="header">
+    <i class="fa fa-angle-left" ng-click="previous()"></i>
+    <span>{{month.format("MMMM, YYYY")}}</span>
+    <i class="fa fa-angle-right" ng-click="next()"></i>
+</div>
+<div class="week names">
+    <span class="day">Sun</span>
+    <span class="day">Mon</span>
+    <span class="day">Tue</span>
+    <span class="day">Wed</span>
+    <span class="day">Thu</span>
+    <span class="day">Fri</span>
+    <span class="day">Sat</span>
+</div>
+<div class="week" ng-repeat="week in weeks">
+    <span class="day" ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }" ng-click="select(day)" ng-repeat="day in week.days">{{day.number}}</span>
+</div>
+</body>
+<script>
+var app = angular.module("demo", []);
+
+app.controller("calendarDemo", function($scope) {
+    $scope.day = moment();
+});
+
+app.directive("calendar", function() {
+    return {
+        restrict: "E",
+        templateUrl: "templates/calendar.html",
+        scope: {
+            selected: "="
+        },
+        link: function(scope) {
+            scope.selected = _removeTime(scope.selected || moment());
+            scope.month = scope.selected.clone();
+
+            var start = scope.selected.clone();
+            start.date(1);
+            _removeTime(start.day(0));
+
+            _buildMonth(scope, start, scope.month);
+
+            scope.select = function(day) {
+                scope.selected = day.date;  
+            };
+
+            scope.next = function() {
+                var next = scope.month.clone();
+                _removeTime(next.month(next.month()+1)).date(1));
+                scope.month.month(scope.month.month()+1);
+                _buildMonth(scope, next, scope.month);
+            };
+
+            scope.previous = function() {
+                var previous = scope.month.clone();
+                _removeTime(previous.month(previous.month()-1).date(1));
+                scope.month.month(scope.month.month()-1);
+                _buildMonth(scope, previous, scope.month);
+            };
+        }
+    };
+    
+    function _removeTime(date) {
+        return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    }
+
+    function _buildMonth(scope, start, month) {
+        scope.weeks = [];
+        var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+        while (!done) {
+            scope.weeks.push({ days: _buildWeek(date.clone(), month) });
+            date.add(1, "w");
+            done = count++ > 2 && monthIndex !== date.month();
+            monthIndex = date.month();
+        }
+    }
+
+    function _buildWeek(date, month) {
+        var days = [];
+        for (var i = 0; i < 7; i++) {
+            days.push({
+                name: date.format("dd").substring(0, 1),
+                number: date.date(),
+                isCurrentMonth: date.month() === month.month(),
+                isToday: date.isSame(new Date(), "day"),
+                date: date
+            });
+            date = date.clone();
+            date.add(1, "d");
+        }
+        return days;
+    }
+});
+</style>
+</html>

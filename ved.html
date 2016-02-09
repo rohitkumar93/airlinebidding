@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Booking Page</title>
+	<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" media="all" type="text/css" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="\\VED\dmtree\New\css\jquery-ui-timepicker-addon.css" />
+	    <link rel="stylesheet" type="text/css" href="\\VED\dmtree\New\css\style.css" />
+	    <script type="text/javascript" src="\\VED\dmtree\New\js\angular-animate.js"></script>
+	     <style>
+        .ScrollStyle
+{
+    max-height: 550px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+.line{background-color:rgb(145,26,48);  } .lin{background-color:white}
+.verticalLine {
+    border-left: thick solid #ff0000;
+}
+
+
+        </style>
+	     <style>
+           .scroll
+        {
+    max-height: 275px;
+    min-width:200px;
+    overflow: auto;
+    overflow-x: hidden;
+        }
+        </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse sd">
+<button type="button" class="navbar-toggle line " data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar lin"></span>
+                <span class="icon-bar lin"></span>
+                <span class="icon-bar lin"></span>                       
+              </button><a class="navbar-brand hidden-md hidden-sm hidden-lg " style="color:white" href="#">WebSiteName</a> 
+  <div class="container-fluid collapse navbar-collapse" id="myNavbar">
+    <div class="navbar-header" >
+     
+      <a class="navbar-brand hidden-xs" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" STYLE="background:black">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li> 
+        </ul>
+      </li>
+      <li><a href="#">Booking</a></li> 
+      <li><a href="#">Contact</a></li> 
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid">
+	<div style="margin-left:30%">
+		<button class="btn" style="background-color:#5d9cec;border:1px solid black;" ><ul class="list-unstyled"><li id="today"></li><li style="opacity: 0.5;font-weight:bold;background-color;color:#00001a">(Today)</li></ul></button>
+		<button class="btn" style="background-color:#7266ba;border:1px solid black" ><ul class="list-unstyled"><li id="tom"></li><li style="opacity: 0.5;font-weight:bold;color:#00001a">(Tomorrow)</li></ul></button>
+		<button class="btn" style="background-color:#37bc9b;border:1px solid black" ><ul class="list-unstyled"><li id="tomm"></li><li style="opacity: 0.5;font-weight:bold;color:#00001a">(Day after Tomorrow)</li></ul></button>
+	</div>
+
+</div>
+<div class="container-fluid" ng-app="myApp" ng-controller="customersCtrl">
+<div class="row">
+			<div class="col-md-3 " style="width:250px;height:5%;border:1px solid #000; margin:20px 50px 0 30px ; padding:0px; ">
+				<div class="ScrollStyle" >
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px;background:#80BFFF" type="button"  value="12:00 A.M. - 01:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="01:00 A.M. - 02:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="02:00 A.M. - 03:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="03:00 A.M. - 04:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="04:00 A.M. - 05:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="05:00 A.M. - 06:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="06:00 A.M. - 07:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="07:00 A.M. - 08:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="08:00 A.M. - 09:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="09:00 A.M. - 10:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="10:00 A.M. - 11:00 A.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="11:00 A.M. - 12:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="12:00 P.M. - 01:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="01:00 P.M. - 02:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="02:00 P.M. - 03:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="03:00 P.M. - 04:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="04:00 P.M. - 05:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="05:00 P.M. - 06:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="06:00 P.M. - 07:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="07:00 P.M. - 08:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="08:00 P.M. - 09:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="09:00 P.M. - 10:00 P.M.">
+							<input class="btn" ng-click="myFunction()" style="height:30px; width: 250px; background:#80BFFF" type="button"  value="10:00 P.M. - 11:00 P.M.">
+							<input class="btn"  ng-click="myFunction()" style="height:30px; width: 250px; background:#FFFFFF" type="button"  value="11:00 P.M. - 12:00 A.M.">
+					</div>
+			</div>	
+			<div class="col-md-9">
+			  <div class="row">		<div id="my-badge" class="blk col-sm-3" style=" font:1.5em;margin-top: 1%;padding:0px;" ng-repeat="x in myData"> 
+				
+					<div style="background:white;"><i style="float:right;display:inline;background:white;">Current Price:$ 140.00</i>
+					        <h4 style="display:inline;text-align:center;padding-left:2px"><marquee><span class="glyphicon glyphicon-plane" style="transform:rotate(310deg);"> </span> Bombay to Goa <span class="glyphicon glyphicon-plane" style="transform:rotate(310deg);"> </span><span class="glyphicon glyphicon-time"></span> Duration:20 mints <span class="glyphicon glyphicon-map-marker"></span> Stops:1 </marquee></h4> 
+					        <div class="scroll"  style="float:left">
+					        <ul class="list-unstyled" style="background:lightgreen;">
+					        <li>1.User A Current Bid: $20</li>
+					        <li>2.User B Current Bid: $19</li>
+					        <li>3.User C Current Bid: $10</li>
+					        <li>4.User C Current Bid: $10</li>
+					        <li>5.User C Current Bid: $10</li>
+					        <li>6.User C Current Bid: $10</li>
+					        <li>7.User C Current Bid: $10</li>
+					        <li>8.User C Current Bid: $10</li>
+					        <li>9.User C Current Bid: $10</li>
+					        <li>10.User C Current Bid: $10</li>
+					        <li>11.User C Current Bid: $10</li>
+					        <li>12.User C Current Bid: $10</li>
+					        <li>13.User C Current Bid: $10</li>
+					        <li>14.User C Current Bid: $10</li>
+					        <li>15.User C Current Bid: $10</li>
+					        </ul>
+					        </div>
+					        <ul class="list-unstyled" style="float:right;margin-top:20%;">
+					        <li>Indigo: $321.00</li>
+					        <li>AirIndia: $321.00</li>
+					        <li>JetAirways: $21.01</li>
+					        <li>Spice: $321.30</li>
+					        </ul>
+				 </div>
+				</div>
+
+			  </div> 
+			</div>	
+			
+</div>
+</div>
+
+
+<script type="text/javascript">
+	var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+} 
+
+if(mm<10) {
+    mm='0'+mm
+} 
+
+today = dd+'/'+mm+'/'+yyyy;
+document.getElementById("today").innerHTML =(today);
+
+</script>
+<script>
+	var app=angular.module('myApp',["ngAnimate"]);
+	app.controller("AppCtrl",function(){
+		this.fadeIt=function(){
+			TweenMax.to($("#my-badge"),1,{opacity:0});
+		}
+	});
+	$("#my-button").click(function (){});
+
+</script>
+ <script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+  $http.get("http://www.w3schools.com/website/Customers_MYSQL.php").then(function (response) {
+  	$scope.myFunction=function(){
+      $scope.myData = response.data;
+  	}
+  });
+});
+</script>
+
+
+
+<script type="text/javascript">
+	var today = new Date();
+var dd = today.getDate()+1;
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+} 
+
+if(mm<10) {
+    mm='0'+mm
+} 
+
+today = dd+'/'+mm+'/'+yyyy;
+document.getElementById("tom").innerHTML =(today);
+
+</script>
+
+<script type="text/javascript">
+	var today = new Date();
+var dd = today.getDate()+2;
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+} 
+
+if(mm<10) {
+    mm='0'+mm
+} 
+
+today = dd+'/'+mm+'/'+yyyy;
+document.getElementById("tomm").innerHTML =(today);
+
+</script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="\VED\\dmtree\New\js\jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="\VED\\dmtree\New\js\jquery-ui-timepicker-addon-i18n.min.js"></script>
+		<script type="text/javascript" src="\\VED\dmtree\New\js\jquery-ui-sliderAccess.js"></script>
+
+		
+</body>
+</html>
