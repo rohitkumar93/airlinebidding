@@ -4,5 +4,6 @@ body{
 .navbar {background-color: #23b7e5; border-style: none;}
 .nav.navbar-nav li a {color: #fff;}
 div .navbar-header .navbar-brand{color: #fff}
-div button { width: 180px;height: 80px; border-radius: 15px 15px 0 0;box-shadow: 5px 2px 35px  #fffdd1;margin:0 5px 0 5px;}
-.blk{width: 350px; height: 275px;margin: 15px; background-color: #6ca9e3;float: left; border: 1px solid black;  box-shadow: 5px 5px 5px #888888;}
+.blk{width: 450px; height: 275px;margin: 15px; background-color: #6ca9e3;float:; border: 1px solid black;  box-shadow: 5px 5px 5px #888888;
+text-align: left;
+}
